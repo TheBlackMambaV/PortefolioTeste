@@ -832,27 +832,12 @@
             </div>
             
             <div class="hero-gallery">
-                <div class="gallery-main">
+                <div class="gallery-main" id="galleryMain">
                     <!-- Gallery images will be inserted by JavaScript based on theme -->
-                    <div class="gallery-image active" data-theme="rap" data-index="0">🎤</div>
-                    <div class="gallery-image" data-theme="rap" data-index="1">🎧</div>
-                    <div class="gallery-image" data-theme="rap" data-index="2">🎵</div>
-                    
-                    <div class="gallery-image" data-theme="classico" data-index="0">🎻</div>
-                    <div class="gallery-image" data-theme="classico" data-index="1">🎹</div>
-                    <div class="gallery-image" data-theme="classico" data-index="2">🎼</div>
-                    
-                    <div class="gallery-image" data-theme="lofi" data-index="0">🌸</div>
-                    <div class="gallery-image" data-theme="lofi" data-index="1">☕</div>
-                    <div class="gallery-image" data-theme="lofi" data-index="2">📚</div>
-                    
-                    <div class="gallery-image" data-theme="metal" data-index="0">🤘</div>
-                    <div class="gallery-image" data-theme="metal" data-index="1">⚡</div>
-                    <div class="gallery-image" data-theme="metal" data-index="2">🔥</div>
-                    
+
                     <div class="gallery-arrow left" id="galleryPrev">←</div>
                     <div class="gallery-arrow right" id="galleryNext">→</div>
-                    
+
                     <div class="gallery-nav" id="galleryDots"></div>
                 </div>
             </div>
@@ -867,30 +852,8 @@
                 </p>
             </div>
             
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">📸</div>
-                    <div class="project-info">
-                        <h3 class="project-title">Retratos Urbanos</h3>
-                        <p class="project-category">Fotografia</p>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-image">🎨</div>
-                    <div class="project-info">
-                        <h3 class="project-title">Identidade Visual</h3>
-                        <p class="project-category">Design Gráfico</p>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-image">💻</div>
-                    <div class="project-info">
-                        <h3 class="project-title">Website E-commerce</h3>
-                        <p class="project-category">Web Design</p>
-                    </div>
-                </div>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects will be inserted by JavaScript based on theme -->
             </div>
         </section>
     </main>
@@ -1002,7 +965,103 @@
             lofi: { title: 'Chill Beats', artist: 'Lofi Girl' },
             metal: { title: 'Thunder Strike', artist: 'Metal Gods' }
         };
-        
+
+        // WORK DATA ORGANIZED BY THEME
+        const worksData = {
+            rap: [
+                {
+                    title: 'Retratos Urbanos',
+                    category: 'Fotografia',
+                    description: 'Série de retratos capturados nas ruas da cidade',
+                    image: 'imgPort/rapcover.jpg',
+                    tags: ['Fotografia', 'Street', 'Retratos']
+                },
+                {
+                    title: 'Website E-commerce',
+                    category: 'Web Design',
+                    description: 'Loja online moderna e responsiva',
+                    image: 'imgPort/rap2.jpeg', 
+                    tags: ['Web', 'E-commerce', 'Design']
+                },
+                {
+                    title: 'App Mobile',
+                    category: 'UI/UX Design',
+                    description: 'Interface para app de fitness',
+                    image: '📱',  // Substitui por: 'imgPort/app-mobile.jpg'
+                    tags: ['UI/UX', 'Mobile', 'App']
+                }
+            ],
+            classico: [
+                {
+                    title: 'Identidade Visual Café',
+                    category: 'Design Gráfico',
+                    description: 'Branding completo e elegante',
+                    image: 'imgPort/classiccover.jpg',
+                    tags: ['Branding', 'Design', 'Identidade']
+                },
+                {
+                    title: 'Paisagens do Norte',
+                    category: 'Fotografia',
+                    description: 'Exploração fotográfica das paisagens portuguesas',
+                    image: 'imgPort/classical2.jpg', 
+                    tags: ['Fotografia', 'Paisagem', 'Natureza']
+                },
+                {
+                    title: 'Editorial de Moda',
+                    category: 'Fotografia',
+                    description: 'Sessão fotográfica editorial sofisticada',
+                    image: '👗',  // Substitui por: 'imgPort/editorial-moda.jpg'
+                    tags: ['Fotografia', 'Moda', 'Editorial']
+                }
+            ],
+            lofi: [
+                {
+                    title: 'Paisagens do Norte',
+                    category: 'Fotografia',
+                    description: 'Paisagens tranquilas e naturais',
+                    image: 'imgPort/loficover.jpg', 
+                    tags: ['Natureza', 'Calma', 'Fotografia']
+                },
+                {
+                    title: 'Café & Lifestyle',
+                    category: 'Fotografia',
+                    description: 'Fotografia de lifestyle e momentos relaxantes',
+                    image: 'imgPort/lofi2.jpg', 
+                    tags: ['Lifestyle', 'Fotografia', 'Relaxante']
+                },
+                {
+                    title: 'Ilustrações Minimalistas',
+                    category: 'Design Gráfico',
+                    description: 'Série de ilustrações clean e minimalistas',
+                    image: '🌸',  // Substitui por: 'imgPort/ilustracoes-minimal.jpg'
+                    tags: ['Ilustração', 'Minimalista', 'Design']
+                }
+            ],
+            metal: [
+                {
+                    title: 'Documentário Musical',
+                    category: 'Vídeo',
+                    description: 'Curta sobre o processo criativo de músicos',
+                    image: 'imgPort/metalcover.jpg',  
+                    tags: ['Vídeo', 'Música', 'Documentário']
+                },
+                {
+                    title: 'Show ao Vivo',
+                    category: 'Vídeo',
+                    description: 'Captação e edição de concerto',
+                    image: 'imgPort/metal2.jpg',  
+                    tags: ['Vídeo', 'Música', 'Concerto']
+                },
+                {
+                    title: 'Motion Graphics',
+                    category: 'Design',
+                    description: 'Animações dinâmicas e impactantes',
+                    image: '⚡',  // Substitui por: 'imgPort/motion-graphics.jpg'
+                    tags: ['Motion', 'Design', 'Animação']
+                }
+            ]
+        };
+
         // Update music based on theme
         const trackTitle = document.getElementById('trackTitle');
         const trackArtist = document.getElementById('trackArtist');
@@ -1014,20 +1073,48 @@
         // GALLERY FUNCTIONALITY
         let currentGalleryIndex = 0;
         let currentThemeImages = [];
-        
+
         function updateGallery() {
             const currentTheme = document.body.className.replace('theme-', '');
-            const allImages = document.querySelectorAll('.gallery-image');
+            const galleryMain = document.getElementById('galleryMain');
             const galleryDots = document.getElementById('galleryDots');
-            
-            // Hide all images
-            allImages.forEach(img => img.classList.remove('active'));
-            
-            // Get images for current theme
-            currentThemeImages = Array.from(allImages).filter(
-                img => img.dataset.theme === currentTheme
-            );
-            
+            const galleryPrev = document.getElementById('galleryPrev');
+            const galleryNext = document.getElementById('galleryNext');
+
+            // Get works for current theme
+            const themeWorks = worksData[currentTheme] || [];
+
+            // Clear existing gallery images (but keep arrows and dots)
+            const existingImages = galleryMain.querySelectorAll('.gallery-image');
+            existingImages.forEach(img => img.remove());
+
+            // Create gallery images from works data
+            currentThemeImages = [];
+            themeWorks.forEach((work, index) => {
+                const imgDiv = document.createElement('div');
+                imgDiv.className = 'gallery-image';
+                imgDiv.dataset.theme = currentTheme;
+                imgDiv.dataset.index = index;
+                imgDiv.title = `${work.title} - ${work.category}`;
+
+                // Check if it's an image path or emoji
+                if (work.image.startsWith('imgPort/')) {
+                    const img = document.createElement('img');
+                    img.src = work.image;
+                    img.alt = work.title;
+                    img.style.width = '100%';
+                    img.style.height = '100%';
+                    img.style.objectFit = 'cover';
+                    imgDiv.appendChild(img);
+                } else {
+                    imgDiv.textContent = work.image; // Emoji fallback
+                }
+
+                // Insert before arrows
+                galleryMain.insertBefore(imgDiv, galleryPrev);
+                currentThemeImages.push(imgDiv);
+            });
+
             // Create dots
             galleryDots.innerHTML = '';
             currentThemeImages.forEach((img, index) => {
@@ -1037,14 +1124,44 @@
                 dot.addEventListener('click', () => showGalleryImage(index));
                 galleryDots.appendChild(dot);
             });
-            
+
             // Show first image
             currentGalleryIndex = 0;
             if (currentThemeImages.length > 0) {
                 currentThemeImages[0].classList.add('active');
             }
         }
-        
+
+        // FEATURED PROJECTS FUNCTIONALITY
+        function updateFeaturedProjects() {
+            const currentTheme = document.body.className.replace('theme-', '');
+            const projectsGrid = document.getElementById('projectsGrid');
+            const themeWorks = worksData[currentTheme] || [];
+
+            // Clear existing projects
+            projectsGrid.innerHTML = '';
+
+            // Show first 3 works from current theme
+            themeWorks.slice(0, 3).forEach(work => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+
+                // Check if it's an image path or emoji
+                const imageContent = work.image.startsWith('imgPort/')
+                    ? `<img src="${work.image}" alt="${work.title}" style="width: 100%; height: 100%; object-fit: cover;">`
+                    : work.image;
+
+                card.innerHTML = `
+                    <div class="project-image">${imageContent}</div>
+                    <div class="project-info">
+                        <h3 class="project-title">${work.title}</h3>
+                        <p class="project-category">${work.category}</p>
+                    </div>
+                `;
+                projectsGrid.appendChild(card);
+            });
+        }
+
         function showGalleryImage(index) {
             const dots = document.querySelectorAll('.gallery-dot');
             
@@ -1077,9 +1194,10 @@
             }
         }, 5000);
         
-        // Initialize gallery
+        // Initialize gallery and featured projects
         updateGallery();
-        
+        updateFeaturedProjects();
+
         // Bot click to change theme
         bot.addEventListener('click', () => {
             themeModal.classList.add('show');
@@ -1097,9 +1215,10 @@
                     trackTitle.textContent = themeMusic[theme].title;
                     trackArtist.textContent = themeMusic[theme].artist;
                 }
-                
+
                 headerBotClickCount = 0;
                 updateGallery(); // Update gallery when theme changes
+                updateFeaturedProjects(); // Update featured projects when theme changes
             });
         });
         
