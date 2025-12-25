@@ -40,7 +40,7 @@
         
         /* WORK GRID */
         .work-section { padding: 40px 5% 80px; max-width: 1400px; margin: 0 auto; }
-        .work-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 40px; }
+        .work-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 40px; justify-content: center; }
         
         .work-item { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; overflow: hidden; transition: all 0.3s; cursor: pointer; }
         .work-item:hover { transform: translateY(-8px); }
@@ -160,104 +160,8 @@
     </div>
     
     <section class="work-section">
-        <div class="work-grid">
-            <!-- Fotografia -->
-            <div class="work-item">
-                <div class="work-image">📸</div>
-                <div class="work-info">
-                    <p class="work-category">Fotografia</p>
-                    <h3 class="work-title">Retratos Urbanos</h3>
-                    <p class="work-description">Série de retratos capturados nas ruas da cidade, explorando a autenticidade das pessoas.</p>
-                    <div class="work-tech">
-                        <span class="tech-tag">Fotografia</span>
-                        <span class="tech-tag">Edição</span>
-                        <span class="tech-tag">2024</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Design -->
-            <div class="work-item">
-                <div class="work-image">🎨</div>
-                <div class="work-info">
-                    <p class="work-category">Design Gráfico</p>
-                    <h3 class="work-title">Identidade Visual Café</h3>
-                    <p class="work-description">Branding completo incluindo logo, paleta de cores e materiais de marketing.</p>
-                    <div class="work-tech">
-                        <span class="tech-tag">Branding</span>
-                        <span class="tech-tag">Illustrator</span>
-                        <span class="tech-tag">Photoshop</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Vídeo -->
-            <div class="work-item">
-                <div class="work-image video">🎬</div>
-                <div class="work-info">
-                    <p class="work-category">Vídeo</p>
-                    <h3 class="work-title">Documentário Musical</h3>
-                    <p class="work-description">Curta-metragem sobre o processo criativo de músicos locais.</p>
-                    <div class="work-tech">
-                        <span class="tech-tag">Vídeo</span>
-                        <span class="tech-tag">Edição</span>
-                        <span class="tech-tag">Premiere Pro</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Website -->
-            <div class="work-item">
-                <div class="work-image link">💻</div>
-                <div class="work-info">
-                    <p class="work-category">Web Design</p>
-                    <h3 class="work-title">Website E-commerce</h3>
-                    <p class="work-description">Design e desenvolvimento de loja online moderna e responsiva.</p>
-                    <div class="work-tech">
-                        <span class="tech-tag">HTML/CSS</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Responsive</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Mais projetos - espaço para adicionar -->
-            <div class="work-item">
-                <div class="work-image">🌅</div>
-                <div class="work-info">
-                    <p class="work-category">Fotografia</p>
-                    <h3 class="work-title">Paisagens do Norte</h3>
-                    <p class="work-description">Exploração fotográfica das paisagens naturais portuguesas.</p>
-                    <div class="work-tech">
-                        <span class="tech-tag">Paisagem</span>
-                        <span class="tech-tag">Natureza</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="work-item">
-                <div class="work-image">📱</div>
-                <div class="work-info">
-                    <p class="work-category">UI/UX Design</p>
-                    <h3 class="work-title">App Mobile</h3>
-                    <p class="work-description">Interface e experiência de utilizador para app de fitness.</p>
-                    <div class="work-tech">
-                        <span class="tech-tag">UI/UX</span>
-                        <span class="tech-tag">Figma</span>
-                        <span class="tech-tag">Mobile</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Placeholder para adicionar mais -->
-            <div class="work-item" style="opacity: 0.5;">
-                <div class="work-image">➕</div>
-                <div class="work-info">
-                    <p class="work-category">Novo Projeto</p>
-                    <h3 class="work-title">Adiciona aqui o teu próximo trabalho</h3>
-                    <p class="work-description">Este espaço está reservado para os teus próximos projetos incríveis.</p>
-                </div>
-            </div>
+        <div class="work-grid" id="workGrid">
+            <!-- Works will be dynamically inserted here by JavaScript -->
         </div>
     </section>
     
@@ -330,21 +234,119 @@
     <script>
         const savedTheme = localStorage.getItem('portfolioTheme') || 'rap';
         document.body.className = `theme-${savedTheme}`;
-        
+
         const themeMusic = {
             rap: { title: 'Street Vibes', artist: 'Urban Flow' },
             classico: { title: 'Symphony No. 5', artist: 'Classical Masters' },
             lofi: { title: 'Chill Beats', artist: 'Lofi Girl' },
             metal: { title: 'Thunder Strike', artist: 'Metal Gods' }
         };
-        
+
+        // WORK DATA ORGANIZED BY THEME
+        const worksData = {
+            rap: [
+                {
+                    title: 'Blogue Pessoal',
+                    category: 'HTML/CSS',
+                    image: 'imgPort/blogue1.png',
+                    url: 'https://theblackmambav.github.io/exercicioaulacam1/'
+                },
+                {
+                    title: 'Portfolio Fotográfico',
+                    category: 'PDF Download',
+                    image: 'imgPort/capaport.jpg',
+                    url: 'https://on-chain.inc/files/975d208d-c3bf-4787-9f42-2c0db385f353-Portfolio.pdf'
+                }
+            ],
+            classico: [
+                {
+                    title: 'Blogue de Interstellar',
+                    category: 'HTML/CSS',
+                    image: 'imgPort/Poster.jpg',
+                    url: 'https://theblackmambav.github.io/Interstellar/'
+                },
+                {
+                    title: 'Laços de Sangue',
+                    category: 'Curta Metragem',
+                    image: 'imgPort/sangue.png',
+                    url: 'https://youtu.be/qeIxx3FcadM'
+                }
+            ],
+            lofi: [
+                {
+                    title: 'Primeira Galeria',
+                    category: 'HTML/CSS',
+                    image: 'imgPort/cruz.png',
+                    url: 'https://theblackmambav.github.io/Galeria/'
+                },
+                {
+                    title: 'Lampada',
+                    category: 'Java',
+                    image: 'imgPort/lofi2.jpg',
+                    url: 'https://theblackmambav.github.io/Lampada/'
+                }
+            ],
+            metal: [
+                {
+                    title: 'FoundFootage.MP4',
+                    category: 'Curta Metragem',
+                    image: 'imgPort/found.png',
+                    url: 'https://youtu.be/Gxp3-c2PB-s'
+                },
+                {
+                    title: 'Gerador de respostas',
+                    category: 'Java',
+                    image: 'imgPort/metal2.JPG',
+                    url: 'https://theblackmambav.github.io/JavaTesting/'
+                }
+            ]
+        };
+
+        // Function to display works based on current theme
+        function updateWorkGrid() {
+            const currentTheme = document.body.className.replace('theme-', '');
+            const workGrid = document.getElementById('workGrid');
+            const themeWorks = worksData[currentTheme] || [];
+
+            // Clear existing works
+            workGrid.innerHTML = '';
+
+            // Display all works from current theme
+            themeWorks.forEach(work => {
+                const workItem = document.createElement('a');
+                workItem.className = 'work-item';
+                workItem.href = work.url || '#';
+                workItem.target = '_blank';
+                workItem.style.textDecoration = 'none';
+                workItem.style.color = 'inherit';
+
+                // Check if it's an image path or emoji
+                const imageContent = work.image && work.image.startsWith('imgPort/')
+                    ? `<img src="${work.image}" alt="${work.title}" style="width: 100%; height: 100%; object-fit: cover;">`
+                    : (work.image || '📁');
+
+                workItem.innerHTML = `
+                    <div class="work-image ${work.category.includes('Curta') ? 'video' : 'link'}">${imageContent}</div>
+                    <div class="work-info">
+                        <p class="work-category">${work.category}</p>
+                        <h3 class="work-title">${work.title}</h3>
+                    </div>
+                `;
+
+                workGrid.appendChild(workItem);
+            });
+        }
+
+        // Initialize work grid
+        updateWorkGrid();
+
         const trackTitle = document.getElementById('trackTitle');
         const trackArtist = document.getElementById('trackArtist');
         if (themeMusic[savedTheme]) {
             trackTitle.textContent = themeMusic[savedTheme].title;
             trackArtist.textContent = themeMusic[savedTheme].artist;
         }
-        
+
         // Bot & Theme Modal
         document.getElementById('bot').addEventListener('click', () => document.getElementById('themeModal').classList.add('show'));
         document.querySelectorAll('.theme-option').forEach(option => {
@@ -357,6 +359,8 @@
                     trackTitle.textContent = themeMusic[theme].title;
                     trackArtist.textContent = themeMusic[theme].artist;
                 }
+                // Update work grid when theme changes
+                updateWorkGrid();
             });
         });
         document.getElementById('themeModal').addEventListener('click', (e) => {
