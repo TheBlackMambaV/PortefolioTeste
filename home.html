@@ -966,6 +966,25 @@
             metal: { title: 'Thunder Strike', artist: 'Metal Gods' }
         };
 
+        // GALLERY DATA - Independent from theme and projects
+        const galleryImages = [
+            {
+                title: 'Portfolio Highlight 1',
+                category: 'Photography',
+                image: '📸'
+            },
+            {
+                title: 'Portfolio Highlight 2',
+                category: 'Design',
+                image: '🎨'
+            },
+            {
+                title: 'Portfolio Highlight 3',
+                category: 'Creative',
+                image: '✨'
+            }
+        ];
+
         // WORK DATA ORGANIZED BY THEME
         const worksData = {
             rap: [
@@ -980,7 +999,7 @@
                     title: 'Website E-commerce',
                     category: 'Web Design',
                     description: 'Loja online moderna e responsiva',
-                    image: 'imgPort/rap2.jpeg', 
+                    image: 'imgPort/rap2.jpeg',
                     tags: ['Web', 'E-commerce', 'Design']
                 },
                 {
@@ -1075,39 +1094,34 @@
         let currentThemeImages = [];
 
         function updateGallery() {
-            const currentTheme = document.body.className.replace('theme-', '');
             const galleryMain = document.getElementById('galleryMain');
             const galleryDots = document.getElementById('galleryDots');
             const galleryPrev = document.getElementById('galleryPrev');
             const galleryNext = document.getElementById('galleryNext');
 
-            // Get works for current theme
-            const themeWorks = worksData[currentTheme] || [];
-
             // Clear existing gallery images (but keep arrows and dots)
             const existingImages = galleryMain.querySelectorAll('.gallery-image');
             existingImages.forEach(img => img.remove());
 
-            // Create gallery images from works data
+            // Create gallery images from independent gallery data
             currentThemeImages = [];
-            themeWorks.forEach((work, index) => {
+            galleryImages.forEach((item, index) => {
                 const imgDiv = document.createElement('div');
                 imgDiv.className = 'gallery-image';
-                imgDiv.dataset.theme = currentTheme;
                 imgDiv.dataset.index = index;
-                imgDiv.title = `${work.title} - ${work.category}`;
+                imgDiv.title = `${item.title} - ${item.category}`;
 
                 // Check if it's an image path or emoji
-                if (work.image.startsWith('imgPort/')) {
+                if (item.image.startsWith('imgPort/')) {
                     const img = document.createElement('img');
-                    img.src = work.image;
-                    img.alt = work.title;
+                    img.src = item.image;
+                    img.alt = item.title;
                     img.style.width = '100%';
                     img.style.height = '100%';
                     img.style.objectFit = 'cover';
                     imgDiv.appendChild(img);
                 } else {
-                    imgDiv.textContent = work.image; // Emoji fallback
+                    imgDiv.textContent = item.image; // Emoji fallback
                 }
 
                 // Insert before arrows
@@ -1217,7 +1231,7 @@
                 }
 
                 headerBotClickCount = 0;
-                updateGallery(); // Update gallery when theme changes
+                // Gallery is now independent from theme
                 updateFeaturedProjects(); // Update featured projects when theme changes
             });
         });
