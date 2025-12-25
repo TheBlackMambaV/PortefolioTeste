@@ -966,6 +966,30 @@
             metal: { title: 'Thunder Strike', artist: 'Metal Gods' }
         };
 
+        // GALLERY DATA - Independent from projects, organized by theme
+        const galleryImages = {
+            rap: [
+                { title: 'Urban Street Style', category: 'Photography', image: 'imgPort/rapcover.jpg' },
+                { title: 'City Nights', category: 'Photography', image: 'imgPort/rap2.jpeg' },
+                { title: 'Graffiti Art', category: 'Design', image: '🎨' }
+            ],
+            classico: [
+                { title: 'Classic Architecture', category: 'Photography', image: 'imgPort/classiccover.jpg' },
+                { title: 'Vintage Portraits', category: 'Photography', image: 'imgPort/classical2.JPG' },
+                { title: 'Timeless Design', category: 'Design', image: '✨' }
+            ],
+            lofi: [
+                { title: 'Peaceful Moments', category: 'Photography', image: 'imgPort/loficover.jpg' },
+                { title: 'Cozy Spaces', category: 'Photography', image: 'imgPort/lofi2.jpg' },
+                { title: 'Soft Aesthetics', category: 'Design', image: '🌸' }
+            ],
+            metal: [
+                { title: 'Dark Atmosphere', category: 'Photography', image: 'imgPort/metalcover.jpg' },
+                { title: 'Intense Energy', category: 'Photography', image: 'imgPort/metal2.JPG' },
+                { title: 'Bold Graphics', category: 'Design', image: '🤘' }
+            ]
+        };
+
         // WORK DATA ORGANIZED BY THEME
         const worksData = {
             rap: [
@@ -980,7 +1004,7 @@
                     title: 'Website E-commerce',
                     category: 'Web Design',
                     description: 'Loja online moderna e responsiva',
-                    image: 'imgPort/rap2.jpeg', 
+                    image: 'imgPort/rap2.jpeg',
                     tags: ['Web', 'E-commerce', 'Design']
                 },
                 {
@@ -1081,33 +1105,32 @@
             const galleryPrev = document.getElementById('galleryPrev');
             const galleryNext = document.getElementById('galleryNext');
 
-            // Get works for current theme
-            const themeWorks = worksData[currentTheme] || [];
-
             // Clear existing gallery images (but keep arrows and dots)
             const existingImages = galleryMain.querySelectorAll('.gallery-image');
             existingImages.forEach(img => img.remove());
 
-            // Create gallery images from works data
+            // Get gallery images for current theme
+            const themeGalleryImages = galleryImages[currentTheme] || [];
+
+            // Create gallery images from theme-specific gallery data
             currentThemeImages = [];
-            themeWorks.forEach((work, index) => {
+            themeGalleryImages.forEach((item, index) => {
                 const imgDiv = document.createElement('div');
                 imgDiv.className = 'gallery-image';
-                imgDiv.dataset.theme = currentTheme;
                 imgDiv.dataset.index = index;
-                imgDiv.title = `${work.title} - ${work.category}`;
+                imgDiv.title = `${item.title} - ${item.category}`;
 
                 // Check if it's an image path or emoji
-                if (work.image.startsWith('imgPort/')) {
+                if (item.image.startsWith('imgPort/')) {
                     const img = document.createElement('img');
-                    img.src = work.image;
-                    img.alt = work.title;
+                    img.src = item.image;
+                    img.alt = item.title;
                     img.style.width = '100%';
                     img.style.height = '100%';
                     img.style.objectFit = 'cover';
                     imgDiv.appendChild(img);
                 } else {
-                    imgDiv.textContent = work.image; // Emoji fallback
+                    imgDiv.textContent = item.image; // Emoji fallback
                 }
 
                 // Insert before arrows
@@ -1217,8 +1240,9 @@
                 }
 
                 headerBotClickCount = 0;
-                updateGallery(); // Update gallery when theme changes
-                updateFeaturedProjects(); // Update featured projects when theme changes
+                // Update both gallery and featured projects when theme changes
+                updateGallery();
+                updateFeaturedProjects();
             });
         });
         
