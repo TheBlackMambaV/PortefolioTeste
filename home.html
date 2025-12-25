@@ -966,24 +966,29 @@
             metal: { title: 'Thunder Strike', artist: 'Metal Gods' }
         };
 
-        // GALLERY DATA - Independent from theme and projects
-        const galleryImages = [
-            {
-                title: 'Portfolio Highlight 1',
-                category: 'Photography',
-                image: '📸'
-            },
-            {
-                title: 'Portfolio Highlight 2',
-                category: 'Design',
-                image: '🎨'
-            },
-            {
-                title: 'Portfolio Highlight 3',
-                category: 'Creative',
-                image: '✨'
-            }
-        ];
+        // GALLERY DATA - Independent from projects, organized by theme
+        const galleryImages = {
+            rap: [
+                { title: 'Urban Street Style', category: 'Photography', image: '🎤' },
+                { title: 'City Nights', category: 'Photography', image: '🌃' },
+                { title: 'Graffiti Art', category: 'Design', image: '🎨' }
+            ],
+            classico: [
+                { title: 'Classic Architecture', category: 'Photography', image: '🏛️' },
+                { title: 'Vintage Portraits', category: 'Photography', image: '🖼️' },
+                { title: 'Timeless Design', category: 'Design', image: '✨' }
+            ],
+            lofi: [
+                { title: 'Peaceful Moments', category: 'Photography', image: '🍃' },
+                { title: 'Cozy Spaces', category: 'Photography', image: '☕' },
+                { title: 'Soft Aesthetics', category: 'Design', image: '🌸' }
+            ],
+            metal: [
+                { title: 'Dark Atmosphere', category: 'Photography', image: '🔥' },
+                { title: 'Intense Energy', category: 'Photography', image: '⚡' },
+                { title: 'Bold Graphics', category: 'Design', image: '🤘' }
+            ]
+        };
 
         // WORK DATA ORGANIZED BY THEME
         const worksData = {
@@ -1094,6 +1099,7 @@
         let currentThemeImages = [];
 
         function updateGallery() {
+            const currentTheme = document.body.className.replace('theme-', '');
             const galleryMain = document.getElementById('galleryMain');
             const galleryDots = document.getElementById('galleryDots');
             const galleryPrev = document.getElementById('galleryPrev');
@@ -1103,9 +1109,12 @@
             const existingImages = galleryMain.querySelectorAll('.gallery-image');
             existingImages.forEach(img => img.remove());
 
-            // Create gallery images from independent gallery data
+            // Get gallery images for current theme
+            const themeGalleryImages = galleryImages[currentTheme] || [];
+
+            // Create gallery images from theme-specific gallery data
             currentThemeImages = [];
-            galleryImages.forEach((item, index) => {
+            themeGalleryImages.forEach((item, index) => {
                 const imgDiv = document.createElement('div');
                 imgDiv.className = 'gallery-image';
                 imgDiv.dataset.index = index;
@@ -1231,8 +1240,9 @@
                 }
 
                 headerBotClickCount = 0;
-                // Gallery is now independent from theme
-                updateFeaturedProjects(); // Update featured projects when theme changes
+                // Update both gallery and featured projects when theme changes
+                updateGallery();
+                updateFeaturedProjects();
             });
         });
         
