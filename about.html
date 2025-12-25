@@ -153,6 +153,9 @@
         </div>
     </footer>
     
+    <!-- AUDIO PLAYER -->
+    <audio id="audioPlayer"></audio>
+    
     <div class="sound-bar">
         <div class="sound-info">
             <div class="album-art">🎵</div>
@@ -248,10 +251,85 @@
                 headerBotClickCount++;
             }
         });
-        let isPlaying = false, progress = 35;
-        document.getElementById('playBtn').addEventListener('click', function() { isPlaying = !isPlaying; this.textContent = isPlaying ? '⏸' : '▶'; });
-        document.getElementById('progressBar').addEventListener('click', (e) => { const rect = e.target.getBoundingClientRect(); progress = ((e.clientX - rect.left) / rect.width) * 100; document.getElementById('progressFill').style.width = progress + '%'; });
-        setInterval(() => { if (isPlaying && progress < 100) { progress += 0.2; document.getElementById('progressFill').style.width = progress + '%'; } else if (progress >= 100) { progress = 0; isPlaying = false; document.getElementById('playBtn').textContent = '▶'; } }, 100);
+        // Music Player
+        const audioPlayer = document.getElementById('audioPlayer');
+        const playBtn = document.getElementById('playBtn');
+        const progressBar = document.getElementById('progressBar');
+        const progressFill = document.getElementById('progressFill');
+        const volumeBar = document.getElementById('volumeBar');
+        const volumeFill = document.getElementById('volumeFill');
+        const timeDisplay = document.querySelectorAll('.time');
+        
+        // Get theme and load music from localStorage
+        const themeMusic = {
+            rap: { title: 'Street Vibes', artist: 'Urban Flow', file: 'music/rap.mp3' },
+            classico: { title: 'Symphony No. 5', artist: 'Classical Masters', file: 'music/classico.mp3' },
+            lofi: { title: 'Chill Beats', artist: 'Lofi Girl', file: 'music/lofi.mp3' },
+            metal: { title: 'Thunder Strike', artist: 'Metal Gods', file: 'music/metal.mp3' }
+        };
+        
+        const savedTheme = localStorage.getItem('portfolioTheme') || 'rap';
+        const trackTitle = document.getElementById('trackTitle');
+        const trackArtist = document.getElementById('trackArtist');
+        
+        if (themeMusic[savedTheme]) {
+            trackTitle.textContent = themeMusic[savedTheme].title;
+            trackArtist.textContent = themeMusic[savedTheme].artist;
+            audioPlayer.src = themeMusic[savedTheme].file;
+        }
+        
+        function formatTime(seconds) {
+            if (!seconds || isNaN(seconds)) return '0:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+        
+        playBtn.addEventListener('click', () => {
+            if (audioPlayer.src) {
+                if (audioPlayer.paused) {
+                    audioPlayer.play();
+                    playBtn.textContent = '⏸';
+                } else {
+                    audioPlayer.pause();
+                    playBtn.textContent = '▶';
+                }
+            }
+        });
+        
+        audioPlayer.addEventListener('timeupdate', () => {
+            const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100 || 0;
+            progressFill.style.width = progress + '%';
+            if (timeDisplay[0]) timeDisplay[0].textContent = formatTime(audioPlayer.currentTime);
+        });
+        
+        audioPlayer.addEventListener('loadedmetadata', () => {
+            if (timeDisplay[1]) timeDisplay[1].textContent = formatTime(audioPlayer.duration);
+        });
+        
+        progressBar.addEventListener('click', (e) => {
+            if (audioPlayer.duration) {
+                const rect = progressBar.getBoundingClientRect();
+                const percent = (e.clientX - rect.left) / rect.width;
+                audioPlayer.currentTime = percent * audioPlayer.duration;
+            }
+        });
+        
+        volumeFill.style.width = '70%';
+        audioPlayer.volume = 0.7;
+        
+        volumeBar.addEventListener('click', (e) => {
+            const rect = volumeBar.getBoundingClientRect();
+            const percent = ((e.clientX - rect.left) / rect.width);
+            volumeFill.style.width = (percent * 100) + '%';
+            audioPlayer.volume = percent;
+        });
+        
+        audioPlayer.addEventListener('ended', () => {
+            playBtn.textContent = '▶';
+            audioPlayer.currentTime = 0;
+        });
+        
         document.getElementById('menuBtn').addEventListener('click', function() { const nav = document.getElementById('nav'); nav.classList.toggle('open'); this.textContent = nav.classList.contains('open') ? '✕' : '☰'; });
     </script>
 </body>
