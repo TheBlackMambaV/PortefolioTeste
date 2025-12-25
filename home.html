@@ -410,7 +410,43 @@
             color: var(--text-light);
             letter-spacing: 0.5px;
         }
-        
+
+        /* PROJECT LINKS */
+        .project-links {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text);
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .project-link:hover {
+            background: var(--accent);
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        .theme-lofi .project-link:hover {
+            color: #2d3436;
+        }
+
+        .project-link-icon {
+            font-size: 13px;
+        }
+
         /* FOOTER */
         footer {
             padding: 50px 5%;
@@ -998,21 +1034,35 @@
                     category: 'Fotografia',
                     description: 'Série de retratos capturados nas ruas da cidade',
                     image: 'imgPort/rapcover.jpg',
-                    tags: ['Fotografia', 'Street', 'Retratos']
+                    tags: ['Fotografia', 'Street', 'Retratos'],
+                    links: [
+                        { icon: '🔗', text: 'Ver Galeria', url: '#' },
+                        { icon: '📷', text: 'Instagram', url: '#' }
+                    ]
                 },
                 {
                     title: 'Website E-commerce',
                     category: 'Web Design',
                     description: 'Loja online moderna e responsiva',
                     image: 'imgPort/rap2.jpeg',
-                    tags: ['Web', 'E-commerce', 'Design']
+                    tags: ['Web', 'E-commerce', 'Design'],
+                    links: [
+                        { icon: '🌐', text: 'Ver Site', url: '#' },
+                        { icon: '💻', text: 'GitHub', url: '#' },
+                        { icon: '📱', text: 'Demo Mobile', url: '#' }
+                    ]
                 },
                 {
                     title: 'App Mobile',
                     category: 'UI/UX Design',
                     description: 'Interface para app de fitness',
                     image: '📱',  // Substitui por: 'imgPort/app-mobile.jpg'
-                    tags: ['UI/UX', 'Mobile', 'App']
+                    tags: ['UI/UX', 'Mobile', 'App'],
+                    links: [
+                        { icon: '🎨', text: 'Figma', url: '#' },
+                        { icon: '📱', text: 'Prototype', url: '#' },
+                        { icon: '📊', text: 'UX Research', url: '#' }
+                    ]
                 }
             ],
             classico: [
@@ -1021,21 +1071,33 @@
                     category: 'Design Gráfico',
                     description: 'Branding completo e elegante',
                     image: 'imgPort/classiccover.jpg',
-                    tags: ['Branding', 'Design', 'Identidade']
+                    tags: ['Branding', 'Design', 'Identidade'],
+                    links: [
+                        { icon: '🎨', text: 'Behance', url: '#' },
+                        { icon: '📄', text: 'Case Study', url: '#' }
+                    ]
                 },
                 {
                     title: 'Paisagens do Norte',
                     category: 'Fotografia',
                     description: 'Exploração fotográfica das paisagens portuguesas',
-                    image: 'imgPort/classical2.JPG', 
-                    tags: ['Fotografia', 'Paisagem', 'Natureza']
+                    image: 'imgPort/classical2.JPG',
+                    tags: ['Fotografia', 'Paisagem', 'Natureza'],
+                    links: [
+                        { icon: '🖼️', text: 'Flickr', url: '#' },
+                        { icon: '📷', text: 'Portfolio', url: '#' }
+                    ]
                 },
                 {
                     title: 'Editorial de Moda',
                     category: 'Fotografia',
                     description: 'Sessão fotográfica editorial sofisticada',
                     image: '👗',  // Substitui por: 'imgPort/editorial-moda.jpg'
-                    tags: ['Fotografia', 'Moda', 'Editorial']
+                    tags: ['Fotografia', 'Moda', 'Editorial'],
+                    links: [
+                        { icon: '📸', text: 'Ver Editorial', url: '#' },
+                        { icon: '📷', text: 'Instagram', url: '#' }
+                    ]
                 }
             ],
             lofi: [
@@ -1043,22 +1105,34 @@
                     title: 'Paisagens do Norte',
                     category: 'Fotografia',
                     description: 'Paisagens tranquilas e naturais',
-                    image: 'imgPort/loficover.jpg', 
-                    tags: ['Natureza', 'Calma', 'Fotografia']
+                    image: 'imgPort/loficover.jpg',
+                    tags: ['Natureza', 'Calma', 'Fotografia'],
+                    links: [
+                        { icon: '🖼️', text: 'Flickr', url: '#' },
+                        { icon: '📷', text: 'Portfolio', url: '#' }
+                    ]
                 },
                 {
                     title: 'Café & Lifestyle',
                     category: 'Fotografia',
                     description: 'Fotografia de lifestyle e momentos relaxantes',
-                    image: 'imgPort/lofi2.jpg', 
-                    tags: ['Lifestyle', 'Fotografia', 'Relaxante']
+                    image: 'imgPort/lofi2.jpg',
+                    tags: ['Lifestyle', 'Fotografia', 'Relaxante'],
+                    links: [
+                        { icon: '☕', text: 'Ver Galeria', url: '#' },
+                        { icon: '📷', text: 'Instagram', url: '#' }
+                    ]
                 },
                 {
                     title: 'Ilustrações Minimalistas',
                     category: 'Design Gráfico',
                     description: 'Série de ilustrações clean e minimalistas',
                     image: '🌸',  // Substitui por: 'imgPort/ilustracoes-minimal.jpg'
-                    tags: ['Ilustração', 'Minimalista', 'Design']
+                    tags: ['Ilustração', 'Minimalista', 'Design'],
+                    links: [
+                        { icon: '🎨', text: 'Behance', url: '#' },
+                        { icon: '🖼️', text: 'Dribbble', url: '#' }
+                    ]
                 }
             ],
             metal: [
@@ -1066,22 +1140,35 @@
                     title: 'Documentário Musical',
                     category: 'Vídeo',
                     description: 'Curta sobre o processo criativo de músicos',
-                    image: 'imgPort/metalcover.jpg',  
-                    tags: ['Vídeo', 'Música', 'concerto']
+                    image: 'imgPort/metalcover.jpg',
+                    tags: ['Vídeo', 'Música', 'concerto'],
+                    links: [
+                        { icon: '▶️', text: 'Ver Vídeo', url: '#' },
+                        { icon: '🎥', text: 'YouTube', url: '#' },
+                        { icon: '📝', text: 'Behind the Scenes', url: '#' }
+                    ]
                 },
                 {
                     title: 'Show ao Vivo',
                     category: 'Vídeo',
                     description: 'Captação e edição de concerto',
-                    image: 'imgPort/metal2.JPG',  
-                    tags: ['Vídeo', 'Música', 'Concerto']
+                    image: 'imgPort/metal2.JPG',
+                    tags: ['Vídeo', 'Música', 'Concerto'],
+                    links: [
+                        { icon: '▶️', text: 'Assistir Show', url: '#' },
+                        { icon: '🎸', text: 'Banda', url: '#' }
+                    ]
                 },
                 {
                     title: 'Motion Graphics',
                     category: 'Design',
                     description: 'Animações dinâmicas e impactantes',
                     image: '⚡',  // Substitui por: 'imgPort/motion-graphics.jpg'
-                    tags: ['Motion', 'Design', 'Animação']
+                    tags: ['Motion', 'Design', 'Animação'],
+                    links: [
+                        { icon: '🎬', text: 'Vimeo', url: '#' },
+                        { icon: '🎨', text: 'Behance', url: '#' }
+                    ]
                 }
             ]
         };
@@ -1174,11 +1261,27 @@
                     ? `<img src="${work.image}" alt="${work.title}" style="width: 100%; height: 100%; object-fit: cover;">`
                     : work.image;
 
+                // Generate links HTML
+                let linksHTML = '';
+                if (work.links && work.links.length > 0) {
+                    linksHTML = '<div class="project-links">';
+                    work.links.forEach(link => {
+                        linksHTML += `
+                            <a href="${link.url}" class="project-link" target="_blank">
+                                <span class="project-link-icon">${link.icon}</span>
+                                <span>${link.text}</span>
+                            </a>
+                        `;
+                    });
+                    linksHTML += '</div>';
+                }
+
                 card.innerHTML = `
                     <div class="project-image">${imageContent}</div>
                     <div class="project-info">
                         <h3 class="project-title">${work.title}</h3>
                         <p class="project-category">${work.category}</p>
+                        ${linksHTML}
                     </div>
                 `;
                 projectsGrid.appendChild(card);
