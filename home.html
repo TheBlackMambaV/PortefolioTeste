@@ -998,21 +998,24 @@
                     category: 'Fotografia',
                     description: 'Série de retratos capturados nas ruas da cidade',
                     image: 'imgPort/rapcover.jpg',
-                    tags: ['Fotografia', 'Street', 'Retratos']
+                    tags: ['Fotografia', 'Street', 'Retratos'],
+                    link: 'https://www.behance.net/seu-projeto-1'  // Substitui pelo teu link
                 },
                 {
                     title: 'Website E-commerce',
                     category: 'Web Design',
                     description: 'Loja online moderna e responsiva',
                     image: 'imgPort/rap2.jpeg',
-                    tags: ['Web', 'E-commerce', 'Design']
+                    tags: ['Web', 'E-commerce', 'Design'],
+                    link: 'https://www.behance.net/seu-projeto-2'  // Substitui pelo teu link
                 },
                 {
                     title: 'App Mobile',
                     category: 'UI/UX Design',
                     description: 'Interface para app de fitness',
                     image: '📱',  // Substitui por: 'imgPort/app-mobile.jpg'
-                    tags: ['UI/UX', 'Mobile', 'App']
+                    tags: ['UI/UX', 'Mobile', 'App'],
+                    link: 'https://www.behance.net/seu-projeto-3'  // Substitui pelo teu link
                 }
             ],
             classico: [
@@ -1021,21 +1024,24 @@
                     category: 'Design Gráfico',
                     description: 'Branding completo e elegante',
                     image: 'imgPort/classiccover.jpg',
-                    tags: ['Branding', 'Design', 'Identidade']
+                    tags: ['Branding', 'Design', 'Identidade'],
+                    link: 'https://www.behance.net/seu-projeto-4'
                 },
                 {
                     title: 'Paisagens do Norte',
                     category: 'Fotografia',
                     description: 'Exploração fotográfica das paisagens portuguesas',
-                    image: 'imgPort/classical2.JPG', 
-                    tags: ['Fotografia', 'Paisagem', 'Natureza']
+                    image: 'imgPort/classical2.JPG',
+                    tags: ['Fotografia', 'Paisagem', 'Natureza'],
+                    link: 'https://www.behance.net/seu-projeto-5'
                 },
                 {
                     title: 'Editorial de Moda',
                     category: 'Fotografia',
                     description: 'Sessão fotográfica editorial sofisticada',
                     image: '👗',  // Substitui por: 'imgPort/editorial-moda.jpg'
-                    tags: ['Fotografia', 'Moda', 'Editorial']
+                    tags: ['Fotografia', 'Moda', 'Editorial'],
+                    link: 'https://www.behance.net/seu-projeto-6'
                 }
             ],
             lofi: [
@@ -1043,22 +1049,25 @@
                     title: 'Paisagens do Norte',
                     category: 'Fotografia',
                     description: 'Paisagens tranquilas e naturais',
-                    image: 'imgPort/loficover.jpg', 
-                    tags: ['Natureza', 'Calma', 'Fotografia']
+                    image: 'imgPort/loficover.jpg',
+                    tags: ['Natureza', 'Calma', 'Fotografia'],
+                    link: 'https://www.behance.net/seu-projeto-7'
                 },
                 {
                     title: 'Café & Lifestyle',
                     category: 'Fotografia',
                     description: 'Fotografia de lifestyle e momentos relaxantes',
-                    image: 'imgPort/lofi2.jpg', 
-                    tags: ['Lifestyle', 'Fotografia', 'Relaxante']
+                    image: 'imgPort/lofi2.jpg',
+                    tags: ['Lifestyle', 'Fotografia', 'Relaxante'],
+                    link: 'https://www.behance.net/seu-projeto-8'
                 },
                 {
                     title: 'Ilustrações Minimalistas',
                     category: 'Design Gráfico',
                     description: 'Série de ilustrações clean e minimalistas',
                     image: '🌸',  // Substitui por: 'imgPort/ilustracoes-minimal.jpg'
-                    tags: ['Ilustração', 'Minimalista', 'Design']
+                    tags: ['Ilustração', 'Minimalista', 'Design'],
+                    link: 'https://www.behance.net/seu-projeto-9'
                 }
             ],
             metal: [
@@ -1066,22 +1075,25 @@
                     title: 'Documentário Musical',
                     category: 'Vídeo',
                     description: 'Curta sobre o processo criativo de músicos',
-                    image: 'imgPort/metalcover.jpg',  
-                    tags: ['Vídeo', 'Música', 'concerto']
+                    image: 'imgPort/metalcover.jpg',
+                    tags: ['Vídeo', 'Música', 'concerto'],
+                    link: 'https://www.behance.net/seu-projeto-10'
                 },
                 {
                     title: 'Show ao Vivo',
                     category: 'Vídeo',
                     description: 'Captação e edição de concerto',
-                    image: 'imgPort/metal2.JPG',  
-                    tags: ['Vídeo', 'Música', 'Concerto']
+                    image: 'imgPort/metal2.JPG',
+                    tags: ['Vídeo', 'Música', 'Concerto'],
+                    link: 'https://www.behance.net/seu-projeto-11'
                 },
                 {
                     title: 'Motion Graphics',
                     category: 'Design',
                     description: 'Animações dinâmicas e impactantes',
                     image: '⚡',  // Substitui por: 'imgPort/motion-graphics.jpg'
-                    tags: ['Motion', 'Design', 'Animação']
+                    tags: ['Motion', 'Design', 'Animação'],
+                    link: 'https://www.behance.net/seu-projeto-12'
                 }
             ]
         };
@@ -1181,6 +1193,15 @@
                         <p class="project-category">${work.category}</p>
                     </div>
                 `;
+
+                // Add click event to open project link
+                if (work.link) {
+                    card.addEventListener('click', () => {
+                        window.open(work.link, '_blank');
+                    });
+                    card.style.cursor = 'pointer';
+                }
+
                 projectsGrid.appendChild(card);
             });
         }
