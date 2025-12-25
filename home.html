@@ -378,10 +378,17 @@
             border: 1px solid var(--card-border);
             border-radius: 8px;
             overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
-        
+
         .project-card:hover {
             transform: translateY(-8px);
+        }
+
+        .project-card:visited {
+            color: inherit;
         }
         
         .project-image {
@@ -410,7 +417,7 @@
             color: var(--text-light);
             letter-spacing: 0.5px;
         }
-        
+
         /* FOOTER */
         footer {
             padding: 50px 5%;
@@ -971,22 +978,22 @@
             rap: [
                 { title: 'Urban Street Style', category: 'Photography', image: 'imgPort/rapcover.jpg' },
                 { title: 'City Nights', category: 'Photography', image: 'imgPort/rap2.jpeg' },
-                { title: 'Graffiti Art', category: 'Design', image: '🎨' }
+                { title: 'Graffiti Art', category: 'Design', image: 'imgPort/Rap3.jpeg' }
             ],
             classico: [
                 { title: 'Classic Architecture', category: 'Photography', image: 'imgPort/classiccover.jpg' },
                 { title: 'Vintage Portraits', category: 'Photography', image: 'imgPort/classical2.JPG' },
-                { title: 'Timeless Design', category: 'Design', image: '✨' }
+                { title: 'Timeless Design', category: 'Design', image: 'imgPort/Classico3.jpeg' }
             ],
             lofi: [
                 { title: 'Peaceful Moments', category: 'Photography', image: 'imgPort/loficover.jpg' },
                 { title: 'Cozy Spaces', category: 'Photography', image: 'imgPort/lofi2.jpg' },
-                { title: 'Soft Aesthetics', category: 'Design', image: '🌸' }
+                { title: 'Soft Aesthetics', category: 'Design', image: 'imgPort/Lofi3.JPG' }
             ],
             metal: [
                 { title: 'Dark Atmosphere', category: 'Photography', image: 'imgPort/metalcover.jpg' },
                 { title: 'Intense Energy', category: 'Photography', image: 'imgPort/metal2.JPG' },
-                { title: 'Bold Graphics', category: 'Design', image: '🤘' }
+                { title: 'Bold Graphics', category: 'Design', image: 'imgPort/Metal3.JPG' }
             ]
         };
 
@@ -994,94 +1001,90 @@
         const worksData = {
             rap: [
                 {
-                    title: 'Retratos Urbanos',
-                    category: 'Fotografia',
-                    description: 'Série de retratos capturados nas ruas da cidade',
-                    image: 'imgPort/rapcover.jpg',
-                    tags: ['Fotografia', 'Street', 'Retratos']
+                    title: 'Blogue Pessoal',
+                    category: 'HTML/CSS',
+                    image: 'imgPort/blogue1.png',
+                    url: 'https://theblackmambav.github.io/exercicioaulacam1/'
                 },
                 {
-                    title: 'Website E-commerce',
-                    category: 'Web Design',
-                    description: 'Loja online moderna e responsiva',
-                    image: 'imgPort/rap2.jpeg',
-                    tags: ['Web', 'E-commerce', 'Design']
+                    title: 'Portfolio Fotográfico',
+                    category: 'PDF Download',
+                    image: 'imgPort/capaport.jpg',
+                    url: 'https://on-chain.inc/files/975d208d-c3bf-4787-9f42-2c0db385f353-Portfolio.pdf'
                 },
                 {
                     title: 'App Mobile',
                     category: 'UI/UX Design',
-                    description: 'Interface para app de fitness',
                     image: '📱',  // Substitui por: 'imgPort/app-mobile.jpg'
-                    tags: ['UI/UX', 'Mobile', 'App']
+                    url: '#'
                 }
             ],
             classico: [
                 {
-                    title: 'Identidade Visual Café',
-                    category: 'Design Gráfico',
-                    description: 'Branding completo e elegante',
-                    image: 'imgPort/classiccover.jpg',
-                    tags: ['Branding', 'Design', 'Identidade']
+                    title: 'Blogue de Interstellar',
+                    category: 'HTML/CSS',
+                    image: 'imgPort/Poster.jpg',
+                    url: 'https://theblackmambav.github.io/Interstellar/'
                 },
                 {
-                    title: 'Paisagens do Norte',
-                    category: 'Fotografia',
-                    description: 'Exploração fotográfica das paisagens portuguesas',
-                    image: 'imgPort/classical2.JPG', 
-                    tags: ['Fotografia', 'Paisagem', 'Natureza']
+                    title: 'Laços de Sangue',
+                    category: 'Curta Metragem',
+                    image: 'imgPort/sangue.png',
+                    url: 'https://youtu.be/qeIxx3FcadM'
                 },
                 {
                     title: 'Editorial de Moda',
                     category: 'Fotografia',
-                    description: 'Sessão fotográfica editorial sofisticada',
                     image: '👗',  // Substitui por: 'imgPort/editorial-moda.jpg'
-                    tags: ['Fotografia', 'Moda', 'Editorial']
+                    url: '#'
                 }
             ],
             lofi: [
                 {
-                    title: 'Paisagens do Norte',
-                    category: 'Fotografia',
-                    description: 'Paisagens tranquilas e naturais',
-                    image: 'imgPort/loficover.jpg', 
-                    tags: ['Natureza', 'Calma', 'Fotografia']
+                    title: 'Primeira Galeria',
+                    category: 'HTML/CSS',
+                    image: 'imgPort/cruz.png',
+                    url: 'https://theblackmambav.github.io/Galeria/'
                 },
                 {
                     title: 'Café & Lifestyle',
                     category: 'Fotografia',
                     description: 'Fotografia de lifestyle e momentos relaxantes',
-                    image: 'imgPort/lofi2.jpg', 
-                    tags: ['Lifestyle', 'Fotografia', 'Relaxante']
+                    image: 'imgPort/lofi2.jpg',
+                    tags: ['Lifestyle', 'Fotografia', 'Relaxante'],
+                    url: '#'
                 },
                 {
                     title: 'Ilustrações Minimalistas',
                     category: 'Design Gráfico',
                     description: 'Série de ilustrações clean e minimalistas',
                     image: '🌸',  // Substitui por: 'imgPort/ilustracoes-minimal.jpg'
-                    tags: ['Ilustração', 'Minimalista', 'Design']
+                    tags: ['Ilustração', 'Minimalista', 'Design'],
+                    url: '#'
                 }
             ],
             metal: [
                 {
-                    title: 'Documentário Musical',
-                    category: 'Vídeo',
-                    description: 'Curta sobre o processo criativo de músicos',
-                    image: 'imgPort/metalcover.jpg',  
-                    tags: ['Vídeo', 'Música', 'concerto']
+                    title: 'FoundFootage.MP4',
+                    category: 'Curta Metragem',
+                    image: 'imgPort/found.png',
+                    url: 'https://youtu.be/Gxp3-c2PB-s'
                 },
                 {
                     title: 'Show ao Vivo',
                     category: 'Vídeo',
                     description: 'Captação e edição de concerto',
-                    image: 'imgPort/metal2.JPG',  
-                    tags: ['Vídeo', 'Música', 'Concerto']
+                    image: 'imgPort/metal2.JPG',
+                    tags: ['Vídeo', 'Música', 'Concerto'],
+                    url: '#'
                 },
                 {
                     title: 'Motion Graphics',
                     category: 'Design',
                     description: 'Animações dinâmicas e impactantes',
                     image: '⚡',  // Substitui por: 'imgPort/motion-graphics.jpg'
-                    tags: ['Motion', 'Design', 'Animação']
+                    tags: ['Motion', 'Design', 'Animação'],
+                    url: '#'
                 }
             ]
         };
@@ -1166,8 +1169,10 @@
 
             // Show first 3 works from current theme
             themeWorks.slice(0, 3).forEach(work => {
-                const card = document.createElement('div');
+                const card = document.createElement('a');
                 card.className = 'project-card';
+                card.href = work.url || '#';
+                card.target = '_blank';
 
                 // Check if it's an image path or emoji
                 const imageContent = work.image.startsWith('imgPort/')
