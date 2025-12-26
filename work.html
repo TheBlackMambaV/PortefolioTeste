@@ -177,27 +177,27 @@
             </div>
             <div class="footer-section">
                 <h4>Segue-me</h4>
-                <a href="#">Instagram</a>
-                <a href="#">Behance</a>
-                <a href="#">LinkedIn</a>
+                <a href="https://open.spotify.com/user/scosta96?si=fb39a7f252614bae" target="_blank" rel="noopener">Spotify</a>
+                <a href="https://www.instagram.com/s_costa_96/" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://letterboxd.com/Scosta_96/" target="_blank" rel="noopener">Letterboxd</a>
+                <a href="https://x.com/SCosta_96" target="_blank" rel="noopener">X</a>
             </div>
             <div class="footer-section">
                 <h4>Contacto</h4>
-                <a href="mailto:simao@exemplo.com">simao@exemplo.com</a>
-                <a href="tel:+351912345678">+351 912 345 678</a>
+                <a href="mailto:simaopicosta@gmail.com">simaopicosta@gmail.com</a>
+                <a href="tel:+351912497636">+351 912 497 636</a>
             </div>
         </div>
     </footer>
     
-    <!-- AUDIO PLAYER -->
-    <audio id="audioPlayer"></audio>
+    <!-- Sistema de música global carregado via JS -->
     
     <div class="sound-bar">
         <div class="sound-info">
             <div class="album-art">🎵</div>
             <div class="track-info">
-                <div class="track-title" id="trackTitle">Street Vibes</div>
-                <div class="track-artist" id="trackArtist">Urban Flow</div>
+                <div class="track-title" id="trackTitle">Track 1</div>
+                <div class="track-artist" id="trackArtist">RAP</div>
             </div>
         </div>
         <div class="sound-controls">
@@ -237,20 +237,6 @@
     <script>
         const savedTheme = localStorage.getItem('portfolioTheme') || 'rap';
         document.body.className = `theme-${savedTheme}`;
-        
-        const themeMusic = {
-            rap: { title: 'Street Vibes', artist: 'Urban Flow' },
-            classico: { title: 'Symphony No. 5', artist: 'Classical Masters' },
-            lofi: { title: 'Chill Beats', artist: 'Lofi Girl' },
-            metal: { title: 'Thunder Strike', artist: 'Metal Gods' }
-        };
-        
-        const trackTitle = document.getElementById('trackTitle');
-        const trackArtist = document.getElementById('trackArtist');
-        if (themeMusic[savedTheme]) {
-            trackTitle.textContent = themeMusic[savedTheme].title;
-            trackArtist.textContent = themeMusic[savedTheme].artist;
-        }
 
         // WORK DATA - Todos os trabalhos em destaque
         const worksData = {
@@ -356,9 +342,10 @@
                 document.body.className = `theme-${theme}`;
                 localStorage.setItem('portfolioTheme', theme);
                 document.getElementById('themeModal').classList.remove('show');
-                if (themeMusic[theme]) {
-                    trackTitle.textContent = themeMusic[theme].title;
-                    trackArtist.textContent = themeMusic[theme].artist;
+                
+                // Atualizar música usando sistema global
+                if (window.musicPlayer) {
+                    window.musicPlayer.updateTrack(theme);
                 }
             });
         });
@@ -378,23 +365,50 @@
             }
         });
         
-        // Music Player
-        let isPlaying = false, progress = 35;
-        document.getElementById('playBtn').addEventListener('click', function() {
-            isPlaying = !isPlaying;
-            this.textContent = isPlaying ? '⏸' : '▶';
+        // Music Player Controls - usando sistema global
+        document.addEventListener('DOMContentLoaded', () => {
+            // Aguardar inicialização do musicPlayer
+            setTimeout(() => {
+                if (window.musicPlayer) {
+                    // Só atualizar se o tema realmente mudou
+                    if (window.musicPlayer.currentTrack !== savedTheme) {
+                        window.musicPlayer.updateTrack(savedTheme, true); // true = forçar restart para temas
+                    }
+                    // Sempre atualizar a UI para garantir estado correto
+                    window.musicPlayer.updateUI();
+                    
+                    const playBtn = document.getElementById('playBtn');
+                    const progressBar = document.getElementById('progressBar');
+                    const volumeBar = document.getElementById('volumeBar');
+                    
+                    // Play/Pause button
+                    if (playBtn) {
+                        playBtn.addEventListener('click', () => {
+                            window.musicPlayer.toggle();
+                            window.musicPlayer.updateUI();
+                        });
+                    }
+                    
+                    // Progress bar click
+                    if (progressBar) {
+                        progressBar.addEventListener('click', (e) => {
+                            const rect = progressBar.getBoundingClientRect();
+                            const percent = ((e.clientX - rect.left) / rect.width) * 100;
+                            window.musicPlayer.seek(percent);
+                        });
+                    }
+                    
+                    // Volume control
+                    if (volumeBar) {
+                        volumeBar.addEventListener('click', (e) => {
+                            const rect = volumeBar.getBoundingClientRect();
+                            const percent = ((e.clientX - rect.left) / rect.width);
+                            window.musicPlayer.setVolume(percent);
+                        });
+                    }
+                }
+            }, 100);
         });
-        document.getElementById('progressBar').addEventListener('click', (e) => {
-            const rect = e.target.getBoundingClientRect();
-            progress = ((e.clientX - rect.left) / rect.width) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
-        });
-        setInterval(() => {
-            if (isPlaying && progress < 100) {
-                progress += 0.2;
-                document.getElementById('progressFill').style.width = progress + '%';
-            } else if (progress >= 100) { progress = 0; isPlaying = false; document.getElementById('playBtn').textContent = '▶'; }
-        }, 100);
         
         // Mobile Menu
         document.getElementById('menuBtn').addEventListener('click', function() {
@@ -403,5 +417,6 @@
             this.textContent = nav.classList.contains('open') ? '✕' : '☰';
         });
     </script>
+    <script src="js/musicPlayer.js"></script>
 </body>
 </html>

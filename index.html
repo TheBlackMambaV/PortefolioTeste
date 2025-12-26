@@ -59,6 +59,7 @@
             position: relative;
             animation: shake 2s infinite;
             transition: all 0.3s;
+            z-index: 2;
         }
         
         .bot:hover {
@@ -82,6 +83,9 @@
             background: #666;
             border-radius: 50%;
         }
+
+        /* ensure the logo (name) is below the bot and won't be overlapped */
+        .locked-screen .logo { margin-top: 18px; }
         
         .chains {
             position: absolute;
@@ -120,15 +124,17 @@
         
         .speech-bubble {
             position: absolute;
-            bottom: 130px;
+            /* place the bubble above the bot icon so it visually comes from the icon */
+            bottom: calc(100% + 12px);
             left: 50%;
             transform: translateX(-50%);
             background: white;
-            padding: 20px 25px;
-            border-radius: 15px;
+            padding: 14px 18px;
+            border-radius: 12px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            max-width: 300px;
+            max-width: 280px;
             opacity: 0;
+            z-index: 3;
             animation: fadeInBubble 1s ease 0.5s forwards;
         }
         
@@ -139,7 +145,8 @@
         .speech-bubble::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            /* pointer placed at the bottom of the bubble to point to the icon */
+            top: 100%;
             left: 50%;
             transform: translateX(-50%);
             border-left: 10px solid transparent;
@@ -149,9 +156,9 @@
         
         .speech-bubble p {
             color: #333;
-            font-size: 15px;
-            line-height: 1.6;
-            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 10px;
         }
         
         .unlock-btn {
@@ -170,6 +177,8 @@
         .unlock-btn:hover {
             transform: translateY(-2px);
         }
+
+        
         
         /* THEME MODAL */
         .theme-modal {
@@ -285,19 +294,36 @@
             .theme-modal-content h2 { font-size: 24px; }
             .theme-options { grid-template-columns: repeat(2, 1fr); }
         }
+
+        /* Reduce sizes on short/tiny screens so the speech bubble never goes off-screen */
+        @media (max-height: 700px) {
+            .bot-container { margin: 20px auto; }
+            .bot { width: 80px; height: 80px; border-width: 3px; }
+            .chains { width: 110%; height: 110%; }
+            .speech-bubble { bottom: calc(100% + 8px); max-width: 260px; padding: 10px 14px; }
+            .speech-bubble p { font-size: 13px; }
+            .locked-screen .logo { margin-top: 12px; font-size: 28px; }
+        }
+
+        @media (max-width: 420px) {
+            .bot-container { margin: 12px auto; }
+            .bot { width: 70px; height: 70px; }
+            .speech-bubble { bottom: calc(100% + 6px); max-width: 220px; padding: 8px 12px; }
+            .speech-bubble p { font-size: 12px; }
+            .theme-option-icon { font-size: 36px; }
+            .theme-option-title { font-size: 16px; }
+            .locked-screen .logo { font-size: 26px; }
+        }
     </style>
 </head>
 <body>
     <div class="locked-screen">
-        <h1 class="logo">SIMÃO COSTA</h1>
-        <p class="subtitle">Portfolio Criativo</p>
-        
         <div class="bot-container">
             <div class="speech-bubble">
-                <p>🎵 Socorro! Estou preso aqui! Liberta-me para escolheres o vibe musical do portfolio!</p>
+                <p>Olá?? Sim tu! Por favor liberta-me daqui!!</p>
                 <button class="unlock-btn" id="unlockBtn">🎸 Libertar Bot</button>
             </div>
-            
+
             <div class="bot" id="bot">
                 <div class="chains">
                     <div class="chain"></div>
@@ -309,8 +335,11 @@
                 </div>
             </div>
         </div>
+
+        <h1 class="logo">SIMÃO COSTA</h1>
+        <p class="subtitle">Portfolio Criativo</p>
     </div>
-    
+
     <div class="theme-modal" id="themeModal">
         <div class="theme-modal-content">
             <h2>🎵 LIBERTASTE-ME! 🎵</h2>

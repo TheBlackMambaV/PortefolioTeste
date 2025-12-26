@@ -839,7 +839,7 @@
         <section class="hero">
             <div class="hero-content">
                 <h1>OLÁ</h1>
-                <p class="hero-subtitle">Designer & Fotógrafo em Paredes, Porto</p>
+                <p class="hero-subtitle">Designer & Fotógrafo em Valongo, Porto</p>
                 <p class="hero-text">
                     Sou o Simão, um criativo apaixonado por contar histórias através de design e fotografia. 
                     Especializado em criar experiências visuais únicas que conectam pessoas e marcas.
@@ -881,34 +881,35 @@
                 <a href="home.html">Início</a>
                 <a href="work.html">Trabalhos</a>
                 <a href="about.html">Sobre</a>
+                <a href="skills.html">Skills</a>
                 <a href="contact.html">Contacto</a>
             </div>
             
             <div class="footer-section">
                 <h4>Segue-me</h4>
-                <a href="#">Instagram</a>
-                <a href="#">Behance</a>
-                <a href="#">LinkedIn</a>
+                <a href="https://open.spotify.com/user/scosta96?si=fb39a7f252614bae" target="_blank" rel="noopener">Spotify</a>
+                <a href="https://www.instagram.com/s_costa_96/" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://letterboxd.com/Scosta_96/" target="_blank" rel="noopener">Letterboxd</a>
+                <a href="https://x.com/SCosta_96" target="_blank" rel="noopener">X</a>
             </div>
-            
+
             <div class="footer-section">
                 <h4>Contacto</h4>
-                <a href="mailto:simao@exemplo.com">simao@exemplo.com</a>
-                <a href="tel:+351912345678">+351 912 345 678</a>
+                <a href="mailto:simaopicosta@gmail.com">simaopicosta@gmail.com</a>
+                <a href="tel:+351912497636">+351 912 497 636</a>
             </div>
         </div>
     </footer>
     
-    <!-- AUDIO PLAYER -->
-    <audio id="audioPlayer"></audio>
+    <!-- Sistema de música global carregado via JS -->
     
     <!-- SOUND BAR -->
     <div class="sound-bar">
         <div class="sound-info">
             <div class="album-art">🎵</div>
             <div class="track-info">
-                <div class="track-title" id="trackTitle">Street Vibes</div>
-                <div class="track-artist" id="trackArtist">Urban Flow</div>
+                <div class="track-title" id="trackTitle">Track 1</div>
+                <div class="track-artist" id="trackArtist">RAP</div>
             </div>
         </div>
         <div class="sound-controls">
@@ -1069,15 +1070,8 @@
             ]
         };
 
-        // Update music based on theme
-        const trackTitle = document.getElementById('trackTitle');
-        const trackArtist = document.getElementById('trackArtist');
-        const audioPlayer = document.getElementById('audioPlayer');
-        if (themeMusic[savedTheme]) {
-            trackTitle.textContent = themeMusic[savedTheme].title;
-            trackArtist.textContent = themeMusic[savedTheme].artist;
-            audioPlayer.src = themeMusic[savedTheme].file;
-        }
+        // Inicializar sistema de música global
+        // O musicPlayer será carregado via script externo
         
         // GALLERY FUNCTIONALITY
         let currentGalleryIndex = 0;
@@ -1221,11 +1215,9 @@
                 localStorage.setItem('portfolioTheme', theme);
                 themeModal.classList.remove('show');
                 
-                if (themeMusic[theme]) {
-                    trackTitle.textContent = themeMusic[theme].title;
-                    trackArtist.textContent = themeMusic[theme].artist;
-                    audioPlayer.src = themeMusic[theme].file;
-                    audioPlayer.pause();
+                // Atualizar música usando sistema global
+                if (window.musicPlayer) {
+                    window.musicPlayer.updateTrack(theme);
                 }
 
                 headerBotClickCount = 0;
@@ -1289,75 +1281,49 @@
             }
         });
         
-        // Music Player Controls
-        const playBtn = document.getElementById('playBtn');
-        const progressBar = document.getElementById('progressBar');
-        const progressFill = document.getElementById('progressFill');
-        const volumeBar = document.getElementById('volumeBar');
-        const volumeFill = document.getElementById('volumeFill');
-        const timeDisplay = document.querySelectorAll('.time');
-        
-        let isPlaying = false;
-        
-        // Format time in MM:SS
-        function formatTime(seconds) {
-            if (!seconds || isNaN(seconds)) return '0:00';
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-        }
-        
-        playBtn.addEventListener('click', () => {
-            if (audioPlayer.src) {
-                if (audioPlayer.paused) {
-                    audioPlayer.play();
-                    isPlaying = true;
-                    playBtn.textContent = '⏸';
-                } else {
-                    audioPlayer.pause();
-                    isPlaying = false;
-                    playBtn.textContent = '▶';
+        // Music Player Controls - usando sistema global
+        document.addEventListener('DOMContentLoaded', () => {
+            // Aguardar inicialização do musicPlayer
+            setTimeout(() => {
+                if (window.musicPlayer) {
+                    // Só atualizar se o tema realmente mudou
+                    if (window.musicPlayer.currentTrack !== savedTheme) {
+                        window.musicPlayer.updateTrack(savedTheme, true); // true = forçar restart para temas
+                    }
+                    // Sempre atualizar a UI para garantir estado correto
+                    window.musicPlayer.updateUI();
+                    
+                    const playBtn = document.getElementById('playBtn');
+                    const progressBar = document.getElementById('progressBar');
+                    const volumeBar = document.getElementById('volumeBar');
+                    
+                    // Play/Pause button
+                    if (playBtn) {
+                        playBtn.addEventListener('click', () => {
+                            window.musicPlayer.toggle();
+                            window.musicPlayer.updateUI();
+                        });
+                    }
+                    
+                    // Progress bar click
+                    if (progressBar) {
+                        progressBar.addEventListener('click', (e) => {
+                            const rect = progressBar.getBoundingClientRect();
+                            const percent = ((e.clientX - rect.left) / rect.width) * 100;
+                            window.musicPlayer.seek(percent);
+                        });
+                    }
+                    
+                    // Volume control
+                    if (volumeBar) {
+                        volumeBar.addEventListener('click', (e) => {
+                            const rect = volumeBar.getBoundingClientRect();
+                            const percent = ((e.clientX - rect.left) / rect.width);
+                            window.musicPlayer.setVolume(percent);
+                        });
+                    }
                 }
-            }
-        });
-        
-        // Update progress bar when audio plays
-        audioPlayer.addEventListener('timeupdate', () => {
-            const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100 || 0;
-            progressFill.style.width = progress + '%';
-            if (timeDisplay[0]) timeDisplay[0].textContent = formatTime(audioPlayer.currentTime);
-        });
-        
-        // Update duration when loaded
-        audioPlayer.addEventListener('loadedmetadata', () => {
-            if (timeDisplay[1]) timeDisplay[1].textContent = formatTime(audioPlayer.duration);
-        });
-        
-        // Click on progress bar to seek
-        progressBar.addEventListener('click', (e) => {
-            if (audioPlayer.duration) {
-                const rect = progressBar.getBoundingClientRect();
-                const percent = (e.clientX - rect.left) / rect.width;
-                audioPlayer.currentTime = percent * audioPlayer.duration;
-            }
-        });
-        
-        // Volume control
-        volumeFill.style.width = '70%';
-        audioPlayer.volume = 0.7;
-        
-        volumeBar.addEventListener('click', (e) => {
-            const rect = volumeBar.getBoundingClientRect();
-            const percent = ((e.clientX - rect.left) / rect.width);
-            volumeFill.style.width = (percent * 100) + '%';
-            audioPlayer.volume = percent;
-        });
-        
-        // When audio ends
-        audioPlayer.addEventListener('ended', () => {
-            isPlaying = false;
-            playBtn.textContent = '▶';
-            audioPlayer.currentTime = 0;
+            }, 100);
         });
         
         // Mobile Menu
@@ -1376,5 +1342,6 @@
             }
         });
     </script>
+    <script src="js/musicPlayer.js"></script>
 </body>
 </html>

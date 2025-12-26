@@ -23,7 +23,7 @@
         .header-speech-bubble::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%); border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid white; }
         .header-speech-bubble p { font-size: 13px; margin: 0; text-align: center; }
         nav { display: flex; gap: 35px; }
-        nav a { color: var(--text-light); text-decoration: none; font-size: 14px; transition: color 0.3s; position: relative; }
+        nav a { color: var(--text-light); text-decoration: none; font-size: 14px; transition: color 0.3s; position: relative; letter-spacing: 0.5px; }
         nav a:hover, nav a.active { color: var(--text); }
         nav a.active::after { content: ''; position: absolute; bottom: -5px; left: 0; right: 0; height: 1px; background: var(--accent); }
         .page-header { padding: 80px 5% 60px; max-width: 1200px; margin: 0 auto; text-align: center; }
@@ -112,11 +112,11 @@
         </div>
         <button class="mobile-menu-btn" id="menuBtn">☰</button>
         <nav id="nav">
-            <a href="home.html" class="active">Início</a>
+            <a href="home.html">Início</a>
             <a href="work.html">Trabalhos</a>
             <a href="about.html">Sobre</a>
             <a href="skills.html">Skills</a>
-            <a href="contact.html">Contacto</a>
+            <a href="contact.html" class="active">Contacto</a>
         </nav>
     </header>
     
@@ -128,31 +128,31 @@
     <section class="contact-content">
         <div class="contact-section">
             <h2>Email</h2>
-            <a href="mailto:simao.costa@exemplo.com" class="email-link">simao.costa@exemplo.com</a>
+            <a href="mailto:simaopicosta@gmail.com" class="email-link">simaopicosta@gmail.com</a>
             <p style="color: var(--text-light); margin-top: 15px;">Respondo geralmente em 24h</p>
         </div>
         
         <div class="social-section">
             <h2>Redes Sociais</h2>
             <div class="social-links">
-                <a href="#" class="social-link">
+                <a href="https://open.spotify.com/user/scosta96?si=fb39a7f252614bae" class="social-link" target="_blank" rel="noopener">
+                    <div class="social-icon">🎧</div>
+                    <div class="social-name">Spotify</div>
+                </a>
+
+                <a href="https://www.instagram.com/s_costa_96/" class="social-link" target="_blank" rel="noopener">
                     <div class="social-icon">📷</div>
                     <div class="social-name">Instagram</div>
                 </a>
-                
-                <a href="#" class="social-link">
-                    <div class="social-icon">🎨</div>
-                    <div class="social-name">Behance</div>
+
+                <a href="https://letterboxd.com/Scosta_96/" class="social-link" target="_blank" rel="noopener">
+                    <div class="social-icon">🎞️</div>
+                    <div class="social-name">Letterboxd</div>
                 </a>
-                
-                <a href="#" class="social-link">
-                    <div class="social-icon">💼</div>
-                    <div class="social-name">LinkedIn</div>
-                </a>
-                
-                <a href="#" class="social-link">
+
+                <a href="https://x.com/SCosta_96" class="social-link" target="_blank" rel="noopener">
                     <div class="social-icon">🐦</div>
-                    <div class="social-name">Twitter</div>
+                    <div class="social-name">X</div>
                 </a>
             </div>
         </div>
@@ -162,7 +162,7 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h4>Site Map</h4>
-            <a href="home.html" class="active">Início</a>
+            <a href="home.html">Início</a>
             <a href="work.html">Trabalhos</a>
             <a href="about.html">Sobre</a>
             <a href="skills.html">Skills</a>
@@ -170,26 +170,27 @@
             </div>
             <div class="footer-section">
                 <h4>Segue-me</h4>
-                <a href="#">Instagram</a>
-                <a href="#">Behance</a>
-                <a href="#">LinkedIn</a>
+                <a href="https://open.spotify.com/user/scosta96?si=fb39a7f252614bae" target="_blank" rel="noopener">Spotify</a>
+                <a href="https://www.instagram.com/s_costa_96/" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://letterboxd.com/Scosta_96/" target="_blank" rel="noopener">Letterboxd</a>
+                <a href="https://x.com/SCosta_96" target="_blank" rel="noopener">X</a>
             </div>
             <div class="footer-section">
                 <h4>Contacto</h4>
-                <a href="mailto:simao.costa@exemplo.com">simao.costa@exemplo.com</a>
+                <a href="mailto:simaopicosta@gmail.com">simaopicosta@gmail.com</a>
+                <a href="tel:+351912497636">+351 912 497 636</a>
             </div>
         </div>
     </footer>
     
-    <!-- AUDIO PLAYER -->
-    <audio id="audioPlayer"></audio>
+    <!-- Sistema de música global carregado via JS -->
     
     <div class="sound-bar">
         <div class="sound-info">
             <div class="album-art">🎵</div>
             <div class="track-info">
-                <div class="track-title" id="trackTitle">Street Vibes</div>
-                <div class="track-artist" id="trackArtist">Urban Flow</div>
+                <div class="track-title" id="trackTitle">Track 1</div>
+                <div class="track-artist" id="trackArtist">RAP</div>
             </div>
         </div>
         <div class="sound-controls">
@@ -227,12 +228,25 @@
     <script>
         const savedTheme = localStorage.getItem('portfolioTheme') || 'rap';
         document.body.className = `theme-${savedTheme}`;
-        const themeMusic = { rap: { title: 'Street Vibes', artist: 'Urban Flow' }, classico: { title: 'Symphony No. 5', artist: 'Classical Masters' }, lofi: { title: 'Chill Beats', artist: 'Lofi Girl' }, metal: { title: 'Thunder Strike', artist: 'Metal Gods' } };
-        const trackTitle = document.getElementById('trackTitle'), trackArtist = document.getElementById('trackArtist');
-        if (themeMusic[savedTheme]) { trackTitle.textContent = themeMusic[savedTheme].title; trackArtist.textContent = themeMusic[savedTheme].artist; }
+        
         document.getElementById('bot').addEventListener('click', () => document.getElementById('themeModal').classList.add('show'));
-        document.querySelectorAll('.theme-option').forEach(option => { option.addEventListener('click', () => { const theme = option.dataset.theme; document.body.className = `theme-${theme}`; localStorage.setItem('portfolioTheme', theme); document.getElementById('themeModal').classList.remove('show'); if (themeMusic[theme]) { trackTitle.textContent = themeMusic[theme].title; trackArtist.textContent = themeMusic[theme].artist; } }); });
-        document.getElementById('themeModal').addEventListener('click', (e) => { if (e.target.id === 'themeModal') e.target.classList.remove('show'); });
+        document.querySelectorAll('.theme-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const theme = option.dataset.theme;
+                document.body.className = `theme-${theme}`;
+                localStorage.setItem('portfolioTheme', theme);
+                document.getElementById('themeModal').classList.remove('show');
+                
+                // Atualizar música usando sistema global
+                if (window.musicPlayer) {
+                    window.musicPlayer.updateTrack(theme);
+                }
+            });
+        });
+        document.getElementById('themeModal').addEventListener('click', (e) => {
+            if (e.target.id === 'themeModal') e.target.classList.remove('show');
+        });
+        
         // EASTER EGG - Header Bot
         let headerBotClickCount = 0;
         let hideTimeout;
@@ -280,86 +294,53 @@
             }
         });
         
-        // Music Player
-        const audioPlayer = document.getElementById('audioPlayer');
-        const playBtn = document.getElementById('playBtn');
-        const progressBar = document.getElementById('progressBar');
-        const progressFill = document.getElementById('progressFill');
-        const volumeBar = document.getElementById('volumeBar');
-        const volumeFill = document.getElementById('volumeFill');
-        const timeDisplay = document.querySelectorAll('.time');
-        
-        // Get theme and load music from localStorage
-        const themeMusic = {
-            rap: { title: 'Street Vibes', artist: 'Urban Flow', file: 'music/rap.mp3' },
-            classico: { title: 'Symphony No. 5', artist: 'Classical Masters', file: 'music/classico.mp3' },
-            lofi: { title: 'Chill Beats', artist: 'Lofi Girl', file: 'music/lofi.mp3' },
-            metal: { title: 'Thunder Strike', artist: 'Metal Gods', file: 'music/metal.mp3' }
-        };
-        
-        const savedTheme = localStorage.getItem('portfolioTheme') || 'rap';
-        const trackTitle = document.getElementById('trackTitle');
-        const trackArtist = document.getElementById('trackArtist');
-        
-        if (themeMusic[savedTheme]) {
-            trackTitle.textContent = themeMusic[savedTheme].title;
-            trackArtist.textContent = themeMusic[savedTheme].artist;
-            audioPlayer.src = themeMusic[savedTheme].file;
-        }
-        
-        function formatTime(seconds) {
-            if (!seconds || isNaN(seconds)) return '0:00';
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-        }
-        
-        playBtn.addEventListener('click', () => {
-            if (audioPlayer.src) {
-                if (audioPlayer.paused) {
-                    audioPlayer.play();
-                    playBtn.textContent = '⏸';
-                } else {
-                    audioPlayer.pause();
-                    playBtn.textContent = '▶';
+        // Music Player Controls - usando sistema global
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (window.musicPlayer) {
+                    // Só atualizar se o tema realmente mudou
+                    if (window.musicPlayer.currentTrack !== savedTheme) {
+                        window.musicPlayer.updateTrack(savedTheme, true); // true = forçar restart para temas
+                    }
+                    // Sempre atualizar a UI para garantir estado correto
+                    window.musicPlayer.updateUI();
+                    
+                    const playBtn = document.getElementById('playBtn');
+                    const progressBar = document.getElementById('progressBar');
+                    const volumeBar = document.getElementById('volumeBar');
+                    
+                    if (playBtn) {
+                        playBtn.addEventListener('click', () => {
+                            window.musicPlayer.toggle();
+                            window.musicPlayer.updateUI();
+                        });
+                    }
+                    
+                    if (progressBar) {
+                        progressBar.addEventListener('click', (e) => {
+                            const rect = progressBar.getBoundingClientRect();
+                            const percent = ((e.clientX - rect.left) / rect.width) * 100;
+                            window.musicPlayer.seek(percent);
+                        });
+                    }
+                    
+                    if (volumeBar) {
+                        volumeBar.addEventListener('click', (e) => {
+                            const rect = volumeBar.getBoundingClientRect();
+                            const percent = ((e.clientX - rect.left) / rect.width);
+                            window.musicPlayer.setVolume(percent);
+                        });
+                    }
                 }
-            }
+            }, 100);
         });
         
-        audioPlayer.addEventListener('timeupdate', () => {
-            const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100 || 0;
-            progressFill.style.width = progress + '%';
-            if (timeDisplay[0]) timeDisplay[0].textContent = formatTime(audioPlayer.currentTime);
+        document.getElementById('menuBtn').addEventListener('click', function() {
+            const nav = document.getElementById('nav');
+            nav.classList.toggle('open');
+            this.textContent = nav.classList.contains('open') ? '✕' : '☰';
         });
-        
-        audioPlayer.addEventListener('loadedmetadata', () => {
-            if (timeDisplay[1]) timeDisplay[1].textContent = formatTime(audioPlayer.duration);
-        });
-        
-        progressBar.addEventListener('click', (e) => {
-            if (audioPlayer.duration) {
-                const rect = progressBar.getBoundingClientRect();
-                const percent = (e.clientX - rect.left) / rect.width;
-                audioPlayer.currentTime = percent * audioPlayer.duration;
-            }
-        });
-        
-        volumeFill.style.width = '70%';
-        audioPlayer.volume = 0.7;
-        
-        volumeBar.addEventListener('click', (e) => {
-            const rect = volumeBar.getBoundingClientRect();
-            const percent = ((e.clientX - rect.left) / rect.width);
-            volumeFill.style.width = (percent * 100) + '%';
-            audioPlayer.volume = percent;
-        });
-        
-        audioPlayer.addEventListener('ended', () => {
-            playBtn.textContent = '▶';
-            audioPlayer.currentTime = 0;
-        });
-        
-        document.getElementById('menuBtn').addEventListener('click', function() { const nav = document.getElementById('nav'); nav.classList.toggle('open'); this.textContent = nav.classList.contains('open') ? '✕' : '☰'; });
     </script>
+    <script src="js/musicPlayer.js"></script>
 </body>
 </html>
