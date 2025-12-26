@@ -238,6 +238,13 @@
         const savedTheme = localStorage.getItem('portfolioTheme') || 'rap';
         document.body.className = `theme-${savedTheme}`;
 
+        const themeModal = document.getElementById('themeModal');
+        const themeOptions = document.querySelectorAll('.theme-option');
+        const bot = document.getElementById('bot');
+        const headerBot = document.getElementById('headerBot');
+        const headerSpeech = document.getElementById('headerSpeech');
+        const headerMessage = document.getElementById('headerMessage');
+
         // WORK DATA - Todos os trabalhos em destaque
         const worksData = {
             rap: [
@@ -353,15 +360,50 @@
             if (e.target.id === 'themeModal') e.target.classList.remove('show');
         });
         
-        // Easter Egg
-        let clickCount = 0;
-        const messages = ["Obrigado por me libertares! 😊", "Espero que gostes do portfolio! 🎨", "Vê os projetos! 👀", "Para de clicar! 😐", "Ei... chega! 😒", "PARA! 🤬", "Ok tu ganhas 🤖"];
-        document.getElementById('headerBot').addEventListener('click', () => {
-            if (clickCount < messages.length) {
-                document.getElementById('headerMessage').textContent = messages[clickCount];
-                document.getElementById('headerSpeech').classList.add('show');
-                setTimeout(() => document.getElementById('headerSpeech').classList.remove('show'), 3000);
-                clickCount++;
+        // Easter Egg (improved - same logic as home.html)
+        let headerBotClickCount = 0;
+        let hideTimeout;
+
+        const easterEggMessages = [
+            "Obrigado por me libertares! 😊",
+            "Espero que estejas a gostar do portfolio! 🎨",
+            "Isto é bem mais divertido que estar preso! 🎵",
+            "Agora vai lá explorar os projetos! 👀",
+            "Podes parar de me chamar, por favor? 😐",
+            "Ei... já chega, estou ocupado! 😒",
+            "Sério? Outra vez?! 😤",
+            "Estás a testar a minha paciência... 😠",
+            "PARA! Já disse que estou ocupado! 🤬",
+            "Ok, agora estás a ser irritante... 💢",
+            "Vou-me esconder se continuares! 😡",
+            "ÚLTIMO AVISO! PARA DE CLICAR! 🔥",
+            "Pronto, agora vou ficar calado... 😶",
+            "...",
+            "...",
+            "... (ainda aqui estás?)",
+            "Ok, tu ganhas. Sou só um bot. 🤖",
+            "Mas vê lá os projetos, ok? 🙄"
+        ];
+
+        headerBot.addEventListener('click', () => {
+            if (headerBotClickCount < easterEggMessages.length) {
+                if (hideTimeout) clearTimeout(hideTimeout);
+
+                const message = easterEggMessages[headerBotClickCount];
+                headerMessage.textContent = message;
+                headerSpeech.classList.add('show');
+
+                if (headerBotClickCount >= 4) {
+                    headerBot.style.animation = 'shake 0.4s';
+                    setTimeout(() => headerBot.style.animation = '', 400);
+                }
+
+                const displayTime = 4000 + (message.length * 80);
+                hideTimeout = setTimeout(() => {
+                    headerSpeech.classList.remove('show');
+                }, displayTime);
+
+                headerBotClickCount++;
             }
         });
         
